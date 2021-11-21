@@ -1,17 +1,23 @@
 import TodoItem from "./TodoItem";
 
-interface TodoListProps {
-  todo: Todo;
+interface Props {
+  todos: Array<Todo>;
+  toggleComplete: ToggleTodo;
 }
 
-const TodoList: React.FC<TodoListProps> = ({ todo }) => {
+const TodoList: React.FC<Props> = ({ todos, toggleComplete }) => {
   return (
-    <li className="list-none">
-      <label className={todo.complete ? "line-through" : ""}>
-        <input type="checkbox" checked={todo.complete} />
-        {todo.text}
-      </label>
-    </li>
+    <ul>
+      {todos.map((todo) => {
+        return (
+          <TodoItem
+            key={todo.text}
+            todo={todo}
+            toggleComplete={toggleComplete}
+          />
+        );
+      })}
+    </ul>
   );
 };
 
